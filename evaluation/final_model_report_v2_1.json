@@ -1,0 +1,109 @@
+{
+  "project": "CodeMigrate AI",
+  "base_model": "codellama/CodeLlama-7b-Instruct-hf",
+  "judge_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "test_examples": 17,
+  "models": [
+    "base_codellama",
+    "qlora_v2_0",
+    "qlora_v2_1"
+  ],
+  "behavioral_results": {
+    "base_codellama": {
+      "passed": 2,
+      "total": 17,
+      "accuracy": 0.1176
+    },
+    "qlora_v2_0": {
+      "passed": 14,
+      "total": 17,
+      "accuracy": 0.8235
+    },
+    "qlora_v2_1": {
+      "passed": 14,
+      "total": 17,
+      "accuracy": 0.8235
+    }
+  },
+  "compilation_results": {
+    "base_codellama": {
+      "compiled": 2,
+      "total": 17,
+      "compilation_rate": 0.1176
+    },
+    "qlora_v2_0": {
+      "compiled": 14,
+      "total": 17,
+      "compilation_rate": 0.8235
+    },
+    "qlora_v2_1": {
+      "compiled": 14,
+      "total": 17,
+      "compilation_rate": 0.8235
+    }
+  },
+  "llm_judge_results": {
+    "base_codellama": {
+      "examples": 17,
+      "scores": {
+        "semantic": 3.8824,
+        "api": 3.9412,
+        "contract": 3.7647,
+        "format": 3.8235
+      },
+      "overall_score": 3.8529
+    },
+    "qlora_v2_0": {
+      "examples": 17,
+      "scores": {
+        "semantic": 4.4706,
+        "api": 4.5882,
+        "contract": 4.4118,
+        "format": 4.4118
+      },
+      "overall_score": 4.4706
+    },
+    "qlora_v2_1": {
+      "examples": 17,
+      "scores": {
+        "semantic": 4.5294,
+        "api": 4.6471,
+        "contract": 4.7059,
+        "format": 4.7059
+      },
+      "overall_score": 4.6471
+    }
+  },
+  "inference_results": {
+    "base_codellama": {
+      "total_predictions": 17,
+      "average_latency_seconds": 11.1247,
+      "eos_completion_rate": 0.5294,
+      "average_generated_tokens": 186.06
+    },
+    "qlora_v2_0": {
+      "total_predictions": 17,
+      "average_latency_seconds": 9.4729,
+      "eos_completion_rate": 1.0,
+      "average_generated_tokens": 85.88
+    },
+    "qlora_v2_1": {
+      "total_predictions": 17,
+      "average_latency_seconds": 9.7729,
+      "eos_completion_rate": 1.0,
+      "average_generated_tokens": 88.71
+    }
+  },
+  "bootstrap_report": "/content/drive/MyDrive/CodeMigrateAI/experiments/qlora_v2/final_evaluation_v2_1/statistical_report_v2_1.json",
+  "adapters": {
+    "qlora_v2_0": "/content/drive/MyDrive/CodeMigrateAI/experiments/qlora_v2/codemigrate_qlora_v2_best_adapter",
+    "qlora_v2_1": "/content/drive/MyDrive/CodeMigrateAI/experiments/qlora_v2/codemigrate_qlora_v2_1_adapter"
+  },
+  "limitations": [
+    "Small independent test dataset: 17 examples",
+    "Synthetic migration scenarios",
+    "LLM Judge scores are subjective",
+    "Configuration migration requires improvement",
+    "MC Dropout is not applicable to zero-dropout adapters"
+  ]
+}

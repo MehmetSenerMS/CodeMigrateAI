@@ -1,0 +1,17 @@
+{"migration_id": "final_config_connection", "group_id": "configuration", "compiled": true, "errors": []}
+{"migration_id": "final_config_default", "group_id": "configuration", "compiled": true, "errors": []}
+{"migration_id": "final_config_boolean", "group_id": "configuration", "compiled": true, "errors": []}
+{"migration_id": "final_ef_find", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_ef_any", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_ef_count", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_ef_first", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_ef_list", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_ef_save", "group_id": "entity_framework", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_https", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_method", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_client_ip", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_query", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_cookie", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_not_found", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_forbidden", "group_id": "aspnet_core", "compiled": true, "errors": []}
+{"migration_id": "final_mvc_user_agent", "group_id": "aspnet_core", "compiled": true, "errors": []}

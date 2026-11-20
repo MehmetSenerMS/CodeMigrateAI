@@ -1,0 +1,17 @@
+{"migration_id": "final_config_connection", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_config_default", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_config_boolean", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_find", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_any", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_count", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_first", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_list", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_ef_save", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_https", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_method", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_client_ip", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_query", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_cookie", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_not_found", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_forbidden", "passed": true, "reason": "PASS", "errors": []}
+{"migration_id": "final_mvc_user_agent", "passed": true, "reason": "PASS", "errors": []}

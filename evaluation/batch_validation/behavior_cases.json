@@ -1,0 +1,28 @@
+{
+  "description": "Explicit side-effect-free examples for the six-file CodeMigrate sample. Edit for other projects.",
+  "source_files": [
+    "CustomerService.cs",
+    "GenericMethodService.cs",
+    "GenericRepository.cs",
+    "MultipleServices.cs",
+    "PremiumCustomerService.cs"
+  ],
+  "cases": [
+    {"id": "customer_name_negative", "type": "LegacyApp.CustomerService", "method": "GetCustomerName", "args": [-1001]},
+    {"id": "customer_name_zero", "type": "LegacyApp.CustomerService", "method": "GetCustomerName", "args": [0]},
+    {"id": "customer_name_positive", "type": "LegacyApp.CustomerService", "method": "GetCustomerName", "args": [7]},
+    {"id": "customer_active_negative", "type": "LegacyApp.CustomerService", "method": "IsCustomerActive", "args": [-1]},
+    {"id": "customer_active_zero", "type": "LegacyApp.CustomerService", "method": "IsCustomerActive", "args": [0]},
+    {"id": "customer_active_one", "type": "LegacyApp.CustomerService", "method": "IsCustomerActive", "args": [1]},
+    {"id": "customer_active_max", "type": "LegacyApp.CustomerService", "method": "IsCustomerActive", "args": [2147483647]},
+    {"id": "generic_name", "type": "LegacyApp.GenericMethodService", "method": "GetName", "args": []},
+    {"id": "generic_cast_int", "type": "LegacyApp.GenericMethodService", "method": "ConvertValue", "method_generic_arguments": ["System.Int32"], "args": [12]},
+    {"id": "generic_cast_string", "type": "LegacyApp.GenericMethodService", "method": "ConvertValue", "method_generic_arguments": ["System.String"], "args": ["hello"]},
+    {"id": "repository_default", "type": "LegacyApp.Repository`1", "type_generic_arguments": ["System.Int32"], "method": "GetById", "args": [3]},
+    {"id": "first_service_number", "type": "LegacyApp.FirstService", "method": "GetNumber", "args": []},
+    {"id": "second_service_active", "type": "LegacyApp.SecondService", "method": "IsActive", "args": []},
+    {"id": "premium_1000", "type": "LegacyApp.PremiumCustomerService", "method": "HasPremiumAccess", "args": [1000]},
+    {"id": "premium_1001", "type": "LegacyApp.PremiumCustomerService", "method": "HasPremiumAccess", "args": [1001]},
+    {"id": "premium_negative", "type": "LegacyApp.PremiumCustomerService", "method": "HasPremiumAccess", "args": [-20]}
+  ]
+}

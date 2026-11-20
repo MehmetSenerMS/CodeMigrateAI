@@ -1,0 +1,93 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+id_rsa*
+id_ed25519*
+secrets.json
+**/secrets.json
+
+# Model weights, adapters and checkpoints (download separately)
+models/
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.bin
+*.h5
+*.hdf5
+*.tflite
+adapter_model.*
+checkpoint-*/
+**/checkpoint-*/
+
+# Local datasets, indexes, RAG stores, migration drafts and test output
+data/
+outputs/
+qdrant_storage/
+chroma/
+chromadb/
+vector_store/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.arrow
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.venv/
+venv/
+env/
+*.egg-info/
+build/
+dist/
+pip-wheel-metadata/
+
+# Notebooks: keep .ipynb source files, exclude local checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# IDE and OS
+.spyproject/
+.spyder-py3/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# C# / .NET build output
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+TestResults/
+
+# Temporary exports, logs and caches
+*.log
+*.tmp
+*.bak
+*.zip
+*.7z
+*.tar.gz
+*.swp
+~$*

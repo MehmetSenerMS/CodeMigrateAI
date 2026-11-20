@@ -103,7 +103,10 @@ CodeMigrateAI/
 │   └── batch_validation/                # Controlled behavioral test fixtures
 ├── legacy/                              # Small C# input examples
 ├── tests/                               # Python/unit/integration tests
-├── LLM Fine Tuning Colab Notebooks/     # Training/evaluation notebooks
+├── LLM Fine Tuning Colab Notebooks/
+│   ├── CodeMigrateAI_01_CodeLlama7B_QLoRA_Pilot_and_Evaluation.ipynb
+│   ├── CodeMigrateAI_02_Dataset_Engineering_and_QLoRA_Retraining.ipynb
+│   └── CodeMigrateAI_03_Model_Inference_Service_APIs.ipynb
 ├── run_batch_migration.py
 ├── run_batch_validation.py
 ├── run_batch_configuration_behavior.py
@@ -141,7 +144,7 @@ where $A\in\mathbb{R}^{r\times d_{in}}$, $B\in\mathbb{R}^{d_{out}\times r}$, $r$
 QLoRA stores the frozen base model in 4-bit form and trains the low-rank adapter around it:
 
 $$
-h = \operatorname{dequant}(W_{4bit})x + \frac{\alpha}{r}BAx.
+h = \mathrm{dequant}(W_{4\mathrm{bit}})x + \frac{\alpha}{r}BAx.
 $$
 
 This reduces training memory relative to updating all full-precision model parameters. See the original [LoRA](https://arxiv.org/abs/2106.09685) and [QLoRA](https://arxiv.org/abs/2305.14314) papers for the methodology.
@@ -163,7 +166,7 @@ Optuna's Tree-structured Parzen Estimator (TPE) was used for a small-budget sear
 
 $$
 \lambda^* = \arg\min_{\lambda\in\Lambda}
-\mathcal{L}_{val}\big(\operatorname{Train}(\theta_0,\lambda)\big).
+\mathcal{L}_{\mathrm{val}}\big(\mathrm{Train}(\theta_0,\lambda)\big).
 $$
 
 Selected v2.1 training configuration:
@@ -192,7 +195,7 @@ The retrieval task is to find the right methods and related source evidence from
 For query $q$ and document $d$, a common BM25 form is:
 
 $$
-\operatorname{BM25}(q,d)=\sum_{t\in q}\operatorname{IDF}(t)
+\mathrm{BM25}(q,d)=\sum_{t\in q}\mathrm{IDF}(t)
 \frac{f(t,d)(k_1+1)}{f(t,d)+k_1\left(1-b+b\frac{|d|}{\overline{|d|}}\right)},
 $$
 
@@ -203,7 +206,7 @@ where $f(t,d)$ is the term frequency, $|d|$ the document length, and $\overline{
 An embedding model converts the query and each method chunk into vectors. Similarity can be measured with cosine similarity:
 
 $$
-\operatorname{sim}(q,d)=\frac{\mathbf e_q^\top\mathbf e_d}
+\mathrm{sim}(q,d)=\frac{\mathbf e_q^\top\mathbf e_d}
 {\|\mathbf e_q\|_2\,\|\mathbf e_d\|_2}.
 $$
 
@@ -214,8 +217,8 @@ Qdrant stores and searches these vectors. Dense search can retrieve related code
 BM25 and dense results can be combined without directly adding scores that have incompatible scales:
 
 $$
-\operatorname{RRF}(d)=\sum_{s\in\{\mathrm{BM25},\mathrm{dense}\}}
-\frac{1}{k+\operatorname{rank}_s(d)}.
+\mathrm{RRF}(d)=\sum_{s\in\{\mathrm{BM25},\mathrm{dense}\}}
+\frac{1}{k+\mathrm{rank}_s(d)}.
 $$
 
 $k$ is a fusion constant. The project then uses a cross-encoder to score each query–code pair jointly and rerank candidates:
@@ -281,10 +284,10 @@ An independent `Qwen/Qwen2.5-Coder-7B-Instruct` model scored each output against
 For model $m$, behavioral accuracy across $n$ scenarios is:
 
 $$
-\hat A_m = \frac{1}{n}\sum_{i=1}^n \mathbb 1[\text{case $i$ passes for model $m$}].
+\widehat{A}_m = \frac{1}{n}\sum_{i=1}^{n} y_{m,i}.
 $$
 
-To compare models $A$ and $B$, resample **scenario indices in pairs** (the same indices for both models) and recompute
+Here $y_{m,i}\in\{0,1\}$ indicates whether model $m$ passes scenario $i$. To compare models $A$ and $B$, resample **scenario indices in pairs** (the same indices for both models) and recompute:
 
 $$
 \widehat{\Delta}^{(b)} = \frac{1}{n}\sum_{i\in I_b}
@@ -310,7 +313,7 @@ Individual 95% bootstrap accuracy intervals: base **[0.0000, 0.2941]**; v2.0 and
 | Hybrid | 1.000 | 0.750 | 0.250 | 1.000 |
 | Cross-encoder reranked | 1.000 | 0.792 | 0.250 | 1.000 |
 
-Here, $\mathrm{MRR}=\frac{1}{Q}\sum_{q=1}^{Q}1/\operatorname{rank}_q$ for the first relevant result. Recall@5 / Hit@5 was perfect **on these eight labeled queries**, but BM25 ranked the expected method higher than the semantic variants. Reranking did not consistently improve rankings. Gold labels and source-method identity should be audited before expanding claims.
+Here, $\mathrm{MRR}=\frac{1}{Q}\sum_{q=1}^{Q}\frac{1}{\mathrm{rank}_q}$ for the first relevant result. Recall@5 / Hit@5 was perfect **on these eight labeled queries**, but BM25 ranked the expected method higher than the semantic variants. Reranking did not consistently improve rankings. Gold labels and source-method identity should be audited before expanding claims.
 
 ### RAGAS answer evaluation (8 questions)
 
@@ -393,7 +396,7 @@ The batch script starts in `DRY_RUN=True` mode. Live inference requires changing
 1. **Review before migration.** Generation, compilation, and unit test success do not automatically imply semantic equivalence or safe deployment.
 2. **Generated code is executable input.** The development-time `.NET` validation harness is not sandboxed. Its `RUN` confirmation is intentional.
 3. **Source confidentiality.** Remote inference transmits selected source code over HTTPS. Check for secrets, proprietary code, and authorization before sending it.
-4. **Credentials.** `.env`, adapter weights, tokens, runtime stores, and private datasets are excluded from Git. Inspect notebooks for embedded outputs before committing.
+4. **Credentials.** `.env`, adapter weights, tokens, runtime stores, and private datasets are excluded from Git. The published notebooks have saved execution outputs cleared; still review cell source for embedded secrets before committing.
 5. **Limited benchmark size.** The held-out LLM comparison uses 17 examples; RAGAS uses 8 questions. Confidence intervals and task-specific tests are shown to avoid overclaiming.
 6. **Model licensing.** Download/use of CodeLlama is governed by its own [model license and terms](https://huggingface.co/codellama/CodeLlama-7b-Instruct-hf). Fine-tuned adapter weights are separate from the base model and are not included here.
 
@@ -413,5 +416,6 @@ The batch script starts in `DRY_RUN=True` mode. Live inference requires changing
 
 Core prototype and experimental evaluation completed; code review, reliable dependency locking, a permanent inference host, larger out-of-distribution migration tests, and CI automation are remaining engineering work.
 
-**Maintainer:** [Mehmet Sener](https://github.com/MehmetSenerMS)  
+**Maintainer:** [Mehmet Sener](https://github.com/MehmetSenerMS)
+
 **Purpose:** applied LLM fine-tuning, retrieval, agent orchestration, and executable evaluation for legacy software modernization.
